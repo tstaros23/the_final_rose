@@ -1,22 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'show page' do
-  # User Story 1 of 6
-  #
-  # As a visitor,
-  # When I visit '/bachelorettes/:id',
-  # I see that bachelorette's:
-  # -Name
-  # -Season Number
-  # -Description of Season that they were on
-  # (e.g.
-  #                   Hannah Brown
-  #     Season 15 - The Most Dramatic Season Yet!
-  #   )
-  # I also see a link to see that bachelorette's contestants
-  # When I click on that link
-  # I'm taken to "/bachelorettes/:bachelorette_id/contestants"
-  # and I can see only that bachelorette's contestants
+
   it "shows the bachelorette attributes and has a link to the bachelorette's contestants index page" do
     andrea = Bachelorette.create!(name: 'Andrea', season_number: 6, description: 'Crazy')
     contestant = Contestant.create!(name: 'Bob', age: 67, hometown: 'Denver', bachelorette_id: andrea.id)
@@ -40,18 +25,6 @@ RSpec.describe 'show page' do
     click_on('Contestants')
 
     expect(current_path).to eq("/bachelorettes/#{andrea.id}/contestants")
-
-    expect(page).to have_content(contestant.name)
-    expect(page).to have_content(contestant.age)
-    expect(page).to have_content(contestant.hometown)
-
-    expect(page).to have_content(contestant2.name)
-    expect(page).to have_content(contestant2.age)
-    expect(page).to have_content(contestant2.hometown)
-
-    expect(page).not_to have_content(contestant3.name)
-    expect(page).not_to have_content(contestant3.age)
-    expect(page).not_to have_content(contestant3.hometown)
 
   end
 end
